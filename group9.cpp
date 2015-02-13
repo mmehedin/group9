@@ -22,6 +22,7 @@ int *i, *st;
 
 void parseS (char* cmd, char** tokens);
 void launch (char* tokens);
+int * nextWordIndex(char * cmd);
 
 int * nextWordIndex(char * cmd){
 
@@ -116,5 +117,4 @@ int main(){
 
 	//delete[] tokens;
 	pthread_exit(0);
-	//return 0;
 }//end of main
