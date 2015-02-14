@@ -1,7 +1,7 @@
 
 /*
 *@Title: Homework 2
-*@Authors: Camlin, Mihai Meheding, Sterling Beckham
+*@Authors: Camlin Ard, Mihai Meheding, Sterling Beckham
 *@Date: 02/2015
 *@Description:  implement a command-line program launcher.
 *Parse the string entered by the user.....
@@ -21,7 +21,7 @@ int start_pointer =0;
 int *i, *st;
 
 void parseS (char* cmd, char** tokens);
-void launch (char* tokens);
+void launch (char** tokens);
 int * nextWordIndex(char * cmd);
 
 int * nextWordIndex(char * cmd){
@@ -61,8 +61,19 @@ void parseS (char* cmd, char** tokens){
 	std::cout << "token last: " << *(&tokens[index+1]) << "   "<< std::endl;
 }
 
-void launch (char * tokens){
-	//write code to launch here
+void launch (char** tokens){
+	int ID = fork();
+	
+	if(ID == -1)
+		return -1;
+	
+	if(ID != 0)
+		return ID;
+	
+	int exec = execvp(tokens[0], tokens + 1);
+	
+	if exec == -1)
+		printf("Error! %s:%d\n");
 }
 
 /*
