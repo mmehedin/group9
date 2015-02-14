@@ -1,11 +1,12 @@
 
 /*
 *@Title: Homework 2
-*@Authors: Camlin, Mihai Meheding, Sterling Beckham
+*@Authors: Camlin Ard, Mihai Meheding, Sterling Beckham
 *@Date: 02/2015
 *@Description:  implement a command-line program launcher.
 *Parse the string entered by the user.....
 */
+
 #include <iostream>
 #include <memory.h>
 #include <algorithm>
@@ -21,7 +22,7 @@ int start_pointer =0;
 int *i, *st;
 
 void parseS (char* cmd, char** tokens);
-void launch (char* tokens);
+void launch (char** tokens);
 
 int * nextWordIndex(char * cmd){
 
@@ -60,9 +61,10 @@ void parseS (char* cmd, char** tokens){
 	std::cout << "token last: " << *(&tokens[index+1]) << "   "<< std::endl;
 }
 
+
 void launch (char ** tokens){
 	pid_t id;
-	int child_s;
+	//int child_s;
 	std::cout << "Attempting to spawn new process...\n";
 	id = fork();
 
@@ -70,16 +72,19 @@ void launch (char ** tokens){
 		std::cout << "Oops...process creation failed\n";
 	} else if (id != 0) {
 		std::cout << "I am now a proud parent! My child's ID is " << id << std::endl;
-		 do {
-		       pid_t tpid = wait(&child_s);
-		       if(tpid != id) process_terminated(tpid);
-		     } while(tpid != id);
+
+		//wait for the child to finish must improve
+		// do {
+		//       pid_t tpid = wait(&child_s);
+		 //      if(tpid != id) process_terminated(tpid);
+		 //    } while(tpid != id);
 	} else {
 		std::cout << "Value of id in child is: " << id << std::endl;
 		execvp(tokens[0], tokens);
 		printf("Unknown command\n");
 		exit(0);
 	}
+
 }
 
 /*
@@ -135,4 +140,5 @@ int main(){
 	//delete[] tokens;
 	//pthread_exit(0);
 	return 0;
+
 }//end of main
