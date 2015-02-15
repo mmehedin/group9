@@ -1,4 +1,3 @@
-
 /*
 *@Title: Homework 2
 *@Authors: Camlin Ard, Mihai Meheding, Sterling Beckham
@@ -14,8 +13,8 @@
 #include <unistd.h>
 #include<stdio.h>
 //using namespace std;
-bool rep = true, stop_rep = false;
 
+bool rep = true, stop_rep = false;
 bool *r = &rep;
 int end_pointer = 0;
 int start_pointer =0;
@@ -61,7 +60,6 @@ void parseS (char* cmd, char** tokens){
 	std::cout << "token last: " << *(&tokens[index+1]) << "   "<< std::endl;
 }
 
-
 void launch (char ** tokens){
 	pid_t id;
 	//int child_s;
@@ -75,9 +73,9 @@ void launch (char ** tokens){
 
 		//wait for the child to finish must improve
 		// do {
-		//       pid_t tpid = wait(&child_s);
-		 //      if(tpid != id) process_terminated(tpid);
-		 //    } while(tpid != id);
+		//      pid_t tpid = wait(&child_s);
+		//      if(tpid != id) process_terminated(tpid);
+		//    } while(tpid != id);
 	} else {
 		std::cout << "Value of id in child is: " << id << std::endl;
 		execvp(tokens[0], tokens);
@@ -121,7 +119,6 @@ int main(){
 				tokens[l]=&empt;
 			//std::cout << cmd[0]<<cmd[(com.size()-1)]<<std::endl<<com.size()<<std::endl<<cmd<<std::endl;
 
-
 			//spawn a child process
 
 			//parse the string
@@ -129,6 +126,9 @@ int main(){
 
 			//launch
 			launch(tokens);
+
+			delete[] cmd;
+			delete[] tokens;
 		}else{
 			*r = &stop_rep;
 		}
@@ -137,8 +137,6 @@ int main(){
 	std::cout << std::endl << "Exiting...Bye!"<< std::endl;
 	std::cout << "________________________________" << std::endl;
 
-	//delete[] tokens;
 	//pthread_exit(0);
 	return 0;
-
 }//end of main
