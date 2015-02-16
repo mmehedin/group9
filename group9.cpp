@@ -78,7 +78,7 @@ void launch (char ** tokens){
 		//    } while(tpid != id);
 	} else {
 		std::cout << "Value of id in child is: " << id << std::endl;
-		execvp(tokens[0], tokens);
+		execvp(tokens[0], tokens+1);
 		printf("Unknown command\n");
 		exit(0);
 	}
